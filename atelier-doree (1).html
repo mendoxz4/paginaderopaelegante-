@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atelier Dorée — Moda elegante a medida</title>
+<meta name="description" content="Atelier Dorée: boutique de moda elegante, confección a medida y asesoría de imagen.">
+
+<style>
+/* ===========================================================
+   ATELIER DORÉE — archivo único (HTML + CSS + JS)
+   Paleta: papel #F1EDE4 · tinta #1B1815 · botella #1F3B34
+           bronce #B08D57 · vino #6E2430
+   Tipografía: Fraunces (display) · Inter (texto) · Space Mono (etiquetas)
+=========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap');
+
+:root{
+  --paper:#F1EDE4;
+  --paper-dim:#E4DED0;
+  --ink:#1B1815;
+  --bottle:#1F3B34;
+  --brass:#B08D57;
+  --wine:#6E2430;
+  --line: rgba(27,24,21,0.14);
+  --radius: 2px;
+  --maxw: 1160px;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Inter',sans-serif;
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+img,svg.swatch{max-width:100%;display:block;}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+
+a{color:inherit;text-decoration:none;}
+
+.eyebrow{
+  font-family:'Space Mono',monospace;
+  font-size:0.72rem;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--brass);
+}
+
+h1,h2,h3{
+  font-family:'Fraunces',serif;
+  font-weight:500;
+  margin:0 0 0.4em;
+  color:var(--ink);
+}
+
+h1{font-size:clamp(2.6rem,6vw,4.6rem);line-height:1.02;font-weight:500;}
+h2{font-size:clamp(1.8rem,3.4vw,2.6rem);}
+h3{font-size:1.25rem;}
+
+p{margin:0 0 1em;}
+.lede{font-size:1.1rem;color:rgba(27,24,21,0.75);max-width:46ch;}
+
+/* ---------- Header / nav ---------- */
+.site-header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(241,237,228,0.92);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+}
+.site-header .wrap{
+  display:flex;align-items:center;justify-content:space-between;
+  height:76px;
+}
+.brand{
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  font-weight:500;
+  font-size:1.35rem;
+  letter-spacing:0.01em;
+}
+.brand small{
+  display:block;
+  font-family:'Space Mono',monospace;
+  font-style:normal;
+  font-size:0.6rem;
+  letter-spacing:0.22em;
+  color:var(--brass);
+  margin-top:2px;
+}
+nav.primary-nav ul{
+  list-style:none;display:flex;gap:2.2rem;margin:0;padding:0;
+}
+nav.primary-nav a{
+  font-size:0.86rem;letter-spacing:0.04em;text-transform:uppercase;
+  position:relative;padding-bottom:4px;
+}
+nav.primary-nav a::after{
+  content:"";position:absolute;left:0;bottom:0;height:1px;width:0;
+  background:var(--wine);transition:width .25s ease;
+}
+nav.primary-nav a:hover::after{width:100%;}
+
+.nav-toggle{
+  display:none;
+  background:none;border:1px solid var(--ink);border-radius:var(--radius);
+  width:40px;height:36px;cursor:pointer;position:relative;
+}
+.nav-toggle::before, .nav-toggle span, .nav-toggle::after{
+  content:"";position:absolute;left:9px;right:9px;height:1px;background:var(--ink);
+}
+.nav-toggle::before{top:12px;}
+.nav-toggle span{top:18px;}
+.nav-toggle::after{top:24px;}
+
+/* ---------- Hero ---------- */
+.hero{padding:92px 0 76px;border-bottom:1px solid var(--line);}
+.hero .wrap{display:grid;grid-template-columns:1.15fr 0.85fr;gap:60px;align-items:end;}
+.hero-copy .eyebrow{margin-bottom:18px;}
+.hero-actions{display:flex;gap:1rem;margin-top:1.8rem;flex-wrap:wrap;}
+
+.btn{
+  display:inline-block;
+  font-family:'Space Mono',monospace;
+  font-size:0.78rem;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  padding:0.9em 1.5em;
+  border:1px solid var(--ink);
+  border-radius:var(--radius);
+  transition:background .2s ease,color .2s ease,border-color .2s ease;
+  cursor:pointer;
+  background:none;
+}
+.btn-solid{background:var(--ink);color:var(--paper);}
+.btn-solid:hover{background:var(--wine);border-color:var(--wine);}
+.btn-ghost:hover{border-color:var(--wine);color:var(--wine);}
+
+.hero-swatch{position:relative;border:1px solid var(--line);aspect-ratio:4/5;overflow:hidden;}
+.hero-swatch svg{width:100%;height:100%;}
+.hero-swatch .tag{
+  position:absolute;left:12px;bottom:12px;
+  background:var(--paper);border:1px dashed var(--ink);
+  padding:6px 10px;
+  font-family:'Space Mono',monospace;font-size:0.68rem;letter-spacing:0.08em;
+}
+
+/* ---------- Section scaffolding ---------- */
+section{padding:76px 0;}
+section + section{border-top:1px solid var(--line);}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;margin-bottom:44px;flex-wrap:wrap;}
+
+/* ---------- Ledger / signature numbered tag component ---------- */
+.ledger-item{
+  display:grid;grid-template-columns:64px 1fr;gap:22px;
+  padding:26px 0;border-top:1px dashed var(--line);
+}
+.ledger-item:last-child{border-bottom:1px dashed var(--line);}
+.ledger-no{font-family:'Space Mono',monospace;font-size:0.85rem;color:var(--brass);padding-top:4px;}
+.ledger-body h3{margin-bottom:6px;}
+.ledger-body p{margin-bottom:0;color:rgba(27,24,21,0.72);max-width:56ch;}
+
+/* ---------- Look / gallery cards ---------- */
+.look-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:28px;}
+.look-card{border:1px solid var(--line);background:var(--paper);}
+.look-media{position:relative;aspect-ratio:3/4;overflow:hidden;border-bottom:1px solid var(--line);}
+.look-media svg{width:100%;height:100%;transition:transform .5s ease;}
+.look-card:hover .look-media svg{transform:scale(1.05);}
+.look-no{
+  position:absolute;top:10px;left:10px;
+  font-family:'Space Mono',monospace;font-size:0.68rem;
+  background:var(--paper);border:1px solid var(--ink);padding:3px 7px;z-index:2;
+}
+.look-info{padding:16px 18px 20px;}
+.look-info h3{font-size:1.05rem;margin-bottom:2px;}
+.look-info .meta{font-family:'Space Mono',monospace;font-size:0.68rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--brass);}
+
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);}
+.pillar{background:var(--paper);padding:34px 30px;}
+.pillar .eyebrow{margin-bottom:14px;}
+
+/* ---------- Forms ---------- */
+.form-grid{display:grid;gap:20px;max-width:560px;}
+label{display:block;font-family:'Space Mono',monospace;font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;color:var(--ink);}
+input, textarea, select{
+  width:100%;font-family:'Inter',sans-serif;font-size:0.98rem;
+  padding:0.85em 1em;border:1px solid var(--ink);border-radius:var(--radius);
+  background:var(--paper);color:var(--ink);
+}
+textarea{resize:vertical;min-height:130px;}
+input:focus, textarea:focus, select:focus{outline:2px solid var(--wine);outline-offset:2px;}
+.form-note{font-size:0.85rem;color:rgba(27,24,21,0.6);margin-top:-6px;}
+
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;}
+.info-block{border-top:1px dashed var(--line);padding:20px 0;}
+.info-block:first-child{border-top:none;padding-top:0;}
+.info-block h3{font-size:0.95rem;text-transform:uppercase;letter-spacing:0.05em;font-family:'Inter',sans-serif;font-weight:600;}
+
+.map-plate{
+  border:1px solid var(--line);aspect-ratio:16/10;
+  background:repeating-linear-gradient(45deg, var(--paper-dim) 0 2px, transparent 2px 14px);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Space Mono',monospace;font-size:0.75rem;color:rgba(27,24,21,0.55);
+  text-align:center;padding:1rem;
+}
+
+/* ---------- Footer ---------- */
+footer{border-top:1px solid var(--line);padding:50px 0 34px;background:var(--bottle);color:var(--paper);}
+footer a{opacity:0.85;}
+footer a:hover{opacity:1;color:var(--brass);}
+.footer-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:40px;}
+.footer-grid h3{color:var(--paper);font-family:'Inter',sans-serif;font-size:0.8rem;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;margin-bottom:14px;}
+.footer-grid ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:0.92rem;}
+.footer-brand{font-family:'Fraunces',serif;font-style:italic;font-size:1.3rem;margin-bottom:10px;}
+.footer-bottom{
+  margin-top:40px;padding-top:20px;border-top:1px solid rgba(241,237,228,0.15);
+  font-family:'Space Mono',monospace;font-size:0.7rem;letter-spacing:0.04em;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  color:rgba(241,237,228,0.6);
+}
+
+/* ---------- Page banner (used for internal sections) ---------- */
+.page-banner{padding:64px 0 40px;border-bottom:1px solid var(--line);}
+.breadcrumb{font-family:'Space Mono',monospace;font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--brass);margin-bottom:14px;}
+
+/* ---------- Responsive ---------- */
+@media (max-width:860px){
+  .hero .wrap{grid-template-columns:1fr;}
+  .pillars{grid-template-columns:1fr;}
+  .contact-grid{grid-template-columns:1fr;gap:36px;}
+  .footer-grid{grid-template-columns:1fr;gap:28px;}
+}
+@media (max-width:720px){
+  nav.primary-nav{
+    position:fixed;inset:76px 0 0 0;background:var(--paper);
+    transform:translateY(-110%);transition:transform .3s ease;
+    border-top:1px solid var(--line);
+  }
+  nav.primary-nav.open{transform:translateY(0);}
+  nav.primary-nav ul{flex-direction:column;gap:0;padding:10px 28px;}
+  nav.primary-nav li{border-bottom:1px dashed var(--line);}
+  nav.primary-nav a{display:block;padding:16px 0;}
+  .nav-toggle{display:block;}
+}
+@media (prefers-reduced-motion: reduce){
+  *{transition:none !important;animation:none !important;}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="#inicio" class="brand">Atelier Dorée<small>Boutique · Est. 2016</small></a>
+    <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
+    <nav class="primary-nav">
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#galeria">Galería</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ===================== INICIO ===================== -->
+  <section class="hero" id="inicio">
+    <div class="wrap">
+      <div class="hero-copy">
+        <p class="eyebrow">Colección Otoño — N.º 07</p>
+        <h1>Prendas con carácter,<br>cortadas con intención.</h1>
+        <p class="lede">Diseñamos y confeccionamos piezas a medida para quienes visten con propósito. Cada prenda lleva su propio número de lote, como en el taller.</p>
+        <div class="hero-actions">
+          <a class="btn btn-solid" href="#galeria">Ver la galería</a>
+          <a class="btn btn-ghost" href="#contacto">Reservar cita</a>
+        </div>
+      </div>
+      <div class="hero-swatch">
+        <svg class="swatch" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-label="Muestra de tela de terciopelo color vino">
+          <defs><radialGradient id="terc0" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#8C3040"/><stop offset="1" stop-color="#4A1420"/></radialGradient></defs>
+          <rect width="240" height="240" fill="url(#terc0)"/>
+          <g stroke="#F1EDE4" stroke-opacity="0.06" stroke-width="1">
+            <path d="M0 0v240 M12 0v240 M24 0v240 M36 0v240 M48 0v240 M60 0v240 M72 0v240 M84 0v240 M96 0v240 M108 0v240 M120 0v240 M132 0v240 M144 0v240 M156 0v240 M168 0v240 M180 0v240 M192 0v240 M204 0v240 M216 0v240 M228 0v240"/>
+          </g>
+        </svg>
+        <span class="tag">TERCIOPELO · LOTE 07</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="filosofia">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Nuestro oficio</p>
+          <h2>Cada tela cuenta<br>una temporada distinta.</h2>
+        </div>
+        <p class="lede">Trabajamos con telas nobles seleccionadas a mano y patronaje propio, para que cada pieza se sienta hecha exactamente para ti.</p>
+      </div>
+      <div class="pillars">
+        <div class="pillar">
+          <p class="eyebrow">01 — Selección</p>
+          <h3>Telas nobles</h3>
+          <p>Seda, lana, lino y terciopelo elegidos por su caída y durabilidad, no solo por tendencia.</p>
+        </div>
+        <div class="pillar">
+          <p class="eyebrow">02 — Patronaje</p>
+          <h3>Corte a medida</h3>
+          <p>Tomamos tus medidas reales y ajustamos cada patrón antes de cortar la tela.</p>
+        </div>
+        <div class="pillar">
+          <p class="eyebrow">03 — Acabado</p>
+          <h3>Detalle artesanal</h3>
+          <p>Costuras terminadas a mano y control de calidad en cada prenda antes de su entrega.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== GALERÍA ===================== -->
+  <section id="galeria">
+    <div class="wrap">
+      <p class="breadcrumb">Colección</p>
+      <div class="section-head">
+        <div><h2>Galería de looks</h2>
+        <p class="lede">Cada pieza está numerada como un lote de taller: tela, temporada y nombre.</p></div>
+      </div>
+
+      <div class="look-grid">
+
+        <article class="look-card">
+          <div class="look-media">
+            <span class="look-no">N.º 01</span>
+            <svg class="swatch" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-label="Muestra de tela de seda color bronce">
+              <defs><linearGradient id="seda1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EFE6CE"/><stop offset="0.5" stop-color="#B08D57"/><stop offset="1" stop-color="#EFE6CE"/></linearGradient></defs>
+              <rect width="240" height="240" fill="url(#seda1)"/>
+              <path d="M0 60 Q60 40 120 60 T240 60" stroke="#1B1815" stroke-opacity="0.08" stroke-width="2" fill="none"/>
+              <path d="M0 120 Q60 100 120 120 T240 120" stroke="#1B1815" stroke-opacity="0.08" stroke-width="2" fill="none"/>
+              <path d="M0 180 Q60 160 120 180 T240 180" stroke="#1B1815" stroke-opacity="0.08" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+          <div class="look-info"><h3>Vestido Aurora</h3><p class="meta">Seda · Colección noche</p></div>
+        </article>
+
+        <article class="look-card">
+          <div class="look-media">
+            <span class="look-no">N.º 02</span>
+            <svg class="swatch" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-label="Muestra de tela de lana espiga verde botella">
+              <rect width="240" height="240" fill="#EFEAE0"/>
+              <g stroke="#1F3B34" stroke-width="3" stroke-opacity="0.5">
+                <path d="M0 10 l20 20 M0 50 l20 20 M0 90 l20 20 M0 130 l20 20 M0 170 l20 20 M0 210 l20 20"/>
+                <path d="M20 10 l20 -20 M20 50 l20 -20 M20 90 l20 -20 M20 130 l20 -20 M20 170 l20 -20 M20 210 l20 -20"/>
+                <path d="M40 10 l20 20 M40 50 l20 20 M40 90 l20 20 M40 130 l20 20 M40 170 l20 20 M40 210 l20 20"/>
+                <path d="M60 10 l20 -20 M60 50 l20 -20 M60 90 l20 -20 M60 130 l20 -20 M60 170 l20 -20 M60 210 l20 -20"/>
+                <path d="M80 10 l20 20 M80 50 l20 20 M80 90 l20 20 M80 130 l20 20 M80 170 l20 20 M80 210 l20 20"/>
+                <path d="M100 10 l20 -20 M100 50 l20 -20 M100 90 l20 -20 M100 130 l20 -20 M100 170 l20 -20 M100 210 l20 -20"/>
+                <path d="M120 10 l20 20 M120 50 l20 20 M120 90 l20 20 M120 130 l20 20 M120 170 l20 20 M120 210 l20 20"/>
+                <path d="M140 10 l20 -20 M140 50 l20 -20 M140 90 l20 -20 M140 130 l20 -20 M140 170 l20 -20 M140 210 l20 -20"/>
+                <path d="M160 10 l20 20 M160 50 l20 20 M160 90 l20 20 M160 130 l20 20 M160 170 l20 20 M160 210 l20 20"/>
+                <path d="M180 10 l20 -20 M180 50 l20 -20 M180 90 l20 -20 M180 130 l20 -20 M180 170 l20 -20 M180 210 l20 -20"/>
+                <path d="M200 10 l20 20 M200 50 l20 20 M200 90 l20 20 M200 130 l20 20 M200 170 l20 20 M200 210 l20 20"/>
+              </g>
+            </svg>
+          </div>
+          <div class="look-info"><h3>Traje Belmonte</h3><p class="meta">Lana espiga · Colección día</p></div>
+        </article>
+
+        <article class="look-card">
+          <div class="look-media">
+            <span class="look-no">N.º 03</span>
+            <svg class="swatch" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-label="Muestra de tela de terciopelo color vino">
+              <defs><radialGradient id="terc3" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#8C3040"/><stop offset="1" stop-color="#4A1420"/></radialGradient></defs>
+              <rect width="240" height="240" fill="url(#terc3)"/>
+              <g stroke="#F1EDE4" stroke-opacity="0.06" stroke-width="1"><path d="M0 0v240 M12 0v240 M24 0v240 M36 0v240 M48 0v240 M60 0v240 M72 0v240 M84 0v240 M96 0v240 M108 0v240 M120 0v240 M132 0v240 M144 0v240 M156 0v240 M168 0v240 M180 0v240 M192 0v240 M204 0v240 M216 0v240 M228 0v240"/></g>
+            </svg>
+          </div>
+          <div class="look-info"><h3>Blazer Marchesa</h3><p class="meta">Terciopelo · Colección noche</p></div>
+        </article>
+
+        <article class="look-card">
+          <div class="look-media">
+            <span class="look-no">N.º 04</span>
+            <svg class="swatch" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-label="Muestra de tela de lino natural">
+              <rect width="240" height="240" fill="#E4DED0"/>
+              <g stroke="#1B1815" stroke-opacity="0.14" stroke-width="1">
+                <path d="M0 20h240 M0 40h240 M0 60h240 M0 80h240 M0 100h240 M0 120h240 M0 140h240 M0 160h240 M0 180h240 M0 200h240 M0 220h240"/>
+                <path d="M20 0v240 M40 0v240 M60 0v240 M80 0v240 M100 0v240 M120 0v240 M140 0v240 M160 0v240 M180 0v240 M200 0v240 M220 0v240"/>
+              </g>
+            </svg>
+          </div>
+          <div class="look-info"><h3>Camisa Solano</h3><p class="meta">Lino · Colección día</p></div>
+        </article>
+
+        <article class="look-card">
+          <div class="look-media">
+            <span class="look-no">N.º 05</span>
+            <svg class="swatch" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-label="Muestra de tela de encaje">
+              <rect width="240" height="240" fill="#F1EDE4"/>
+              <g fill="none" stroke="#1F3B34" stroke-opacity="0.35" stroke-width="1.4">
+                <circle cx="30" cy="30" r="12"/><circle cx="90" cy="30" r="12"/><circle cx="150" cy="30" r="12"/><circle cx="210" cy="30" r="12"/>
+                <circle cx="60" cy="70" r="12"/><circle cx="120" cy="70" r="12"/><circle cx="180" cy="70" r="12"/>
+                <circle cx="30" cy="110" r="12"/><circle cx="90" cy="110" r="12"/><circle cx="150" cy="110" r="12"/><circle cx="210" cy="110" r="12"/>
+                <circle cx="60" cy="150" r="12"/><circle cx="120" cy="150" r="12"/><circle cx="180" cy="150" r="12"/>
+                <circle cx="30" cy="190" r="12"/><circle cx="90" cy="190" r="12"/><circle cx="150" cy="190" r="12"/><circle cx="210" cy="190" r="12"/>
+                <circle cx="60" cy="230" r="12"/><circle cx="120" cy="230" r="12"/><circle cx="180" cy="230" r="12"/>
+              </g>
+            </svg>
+          </div>
+          <div class="look-info"><h3>Top Odile</h3><p class="meta">Encaje · Colección noche</p></div>
+        </article>
+
+        <article class="look-card">
+          <div class="look-media">
+            <span class="look-no">N.º 06</span>
+            <svg class="swatch" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-label="Muestra de tela de seda color bronce">
+              <defs><linearGradient id="seda6" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EFE6CE"/><stop offset="0.5" stop-color="#B08D57"/><stop offset="1" stop-color="#EFE6CE"/></linearGradient></defs>
+              <rect width="240" height="240" fill="url(#seda6)"/>
+              <path d="M0 60 Q60 40 120 60 T240 60" stroke="#1B1815" stroke-opacity="0.08" stroke-width="2" fill="none"/>
+              <path d="M0 120 Q60 100 120 120 T240 120" stroke="#1B1815" stroke-opacity="0.08" stroke-width="2" fill="none"/>
+              <path d="M0 180 Q60 160 120 180 T240 180" stroke="#1B1815" stroke-opacity="0.08" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+          <div class="look-info"><h3>Falda Celeste</h3><p class="meta">Seda · Colección día</p></div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SERVICIOS ===================== -->
+  <section id="servicios">
+    <div class="wrap">
+      <p class="breadcrumb">Atelier</p>
+      <div class="section-head">
+        <div><h2>Servicios del atelier</h2>
+        <p class="lede">Del boceto a la prenda terminada, numerados como en el libro de pedidos del taller.</p></div>
+      </div>
+
+      <div class="ledger-item">
+        <span class="ledger-no">SERV. 01</span>
+        <div class="ledger-body">
+          <h3>Confección a medida</h3>
+          <p>Diseñamos y confeccionamos la prenda desde cero: elección de tela, patronaje personal y al menos dos pruebas de ajuste antes de la entrega.</p>
+        </div>
+      </div>
+      <div class="ledger-item">
+        <span class="ledger-no">SERV. 02</span>
+        <div class="ledger-body">
+          <h3>Asesoría de imagen</h3>
+          <p>Sesión personal para definir paleta de color, siluetas y prendas clave según tu cuerpo, estilo de vida y ocasiones habituales.</p>
+        </div>
+      </div>
+      <div class="ledger-item">
+        <span class="ledger-no">SERV. 03</span>
+        <div class="ledger-body">
+          <h3>Ajustes y arreglos de alta costura</h3>
+          <p>Entalles, dobladillos, cambio de forro y reparaciones de prendas ya confeccionadas, incluidas piezas de otras marcas.</p>
+        </div>
+      </div>
+      <div class="ledger-item">
+        <span class="ledger-no">SERV. 04</span>
+        <div class="ledger-body">
+          <h3>Estilismo para eventos</h3>
+          <p>Selección y ajuste de vestuario para bodas, gala o sesiones fotográficas, con acompañamiento el día del evento si se requiere.</p>
+        </div>
+      </div>
+      <div class="ledger-item">
+        <span class="ledger-no">SERV. 05</span>
+        <div class="ledger-body">
+          <h3>Personal shopper</h3>
+          <p>Te acompañamos a seleccionar piezas para renovar o completar tu guardarropa, dentro o fuera del atelier.</p>
+        </div>
+      </div>
+      <div class="ledger-item">
+        <span class="ledger-no">SERV. 06</span>
+        <div class="ledger-body">
+          <h3>Cuidado y guarda de prendas</h3>
+          <p>Planchado, empaque protector y guardado estacional de piezas delicadas como seda, terciopelo y encaje.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <div><p class="eyebrow">Cómo funciona</p><h2>De la primera cita a la entrega</h2></div>
+      </div>
+      <div class="pillars">
+        <div class="pillar"><p class="eyebrow">01 — Cita</p><h3>Conversamos</h3><p>Revisamos qué necesitas, tu presupuesto y los tiempos disponibles.</p></div>
+        <div class="pillar"><p class="eyebrow">02 — Medidas</p><h3>Tomamos medidas</h3><p>Elegimos tela y confirmamos el patrón antes de cortar.</p></div>
+        <div class="pillar"><p class="eyebrow">03 — Entrega</p><h3>Prueba final</h3><p>Ajustamos los últimos detalles y entregamos tu prenda lista.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACTO ===================== -->
+  <section id="contacto">
+    <div class="wrap">
+      <p class="breadcrumb">Cita</p>
+      <div class="section-head">
+        <div><h2>Reserva tu cita</h2>
+        <p class="lede">Escríbenos para agendar una visita al atelier o resolver dudas sobre algún servicio. Respondemos en menos de 48 horas.</p></div>
+      </div>
+
+      <div class="contact-grid">
+        <div>
+          <form id="contact-form" class="form-grid" novalidate>
+            <div>
+              <label for="nombre">Nombre completo</label>
+              <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div>
+              <label for="email">Correo electrónico</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div>
+              <label for="servicio">Servicio de interés</label>
+              <select id="servicio" name="servicio">
+                <option>Confección a medida</option>
+                <option>Asesoría de imagen</option>
+                <option>Ajustes de alta costura</option>
+                <option>Estilismo para eventos</option>
+                <option>Personal shopper</option>
+                <option>Otro</option>
+              </select>
+            </div>
+            <div>
+              <label for="mensaje">Mensaje</label>
+              <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos qué estás buscando…"></textarea>
+            </div>
+            <div>
+              <button type="submit" class="btn btn-solid">Enviar mensaje</button>
+              <p id="form-status" class="form-note" role="status"></p>
+            </div>
+          </form>
+        </div>
+
+        <div>
+          <div class="info-block"><h3>Dirección</h3><p>Calle de las Flores 128, Local 3<br>Zona Rosa</p></div>
+          <div class="info-block"><h3>Horario</h3><p>Martes a sábado, 11:00–19:00<br>Solo con cita previa</p></div>
+          <div class="info-block"><h3>Contacto directo</h3><p>hola@atelierdoree.com<br>+00 000 000 000</p></div>
+          <div class="map-plate">Mapa del atelier<br>(reemplazar con mapa incrustado)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-brand">Atelier Dorée</p>
+        <p>Moda elegante y confección a medida. Cada prenda, un lote numerado del taller.</p>
+      </div>
+      <div>
+        <h3>Explorar</h3>
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#galeria">Galería</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Atelier</h3>
+        <ul>
+          <li>Martes a sábado, 11:00–19:00</li>
+          <li>Solo con cita previa</li>
+          <li>hola@atelierdoree.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Atelier Dorée</span>
+      <span>Sitio de ejemplo</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const toggle = document.querySelector('.nav-toggle');
+  const nav = document.querySelector('nav.primary-nav');
+
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  const form = document.querySelector('#contact-form');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const status = document.querySelector('#form-status');
+      const nombre = form.nombre.value.trim();
+      if (!nombre) return;
+      status.textContent = `Gracias, ${nombre}. Hemos recibido tu mensaje y te responderemos en menos de 48 horas.`;
+      status.style.color = '#1F3B34';
+      form.reset();
+    });
+  }
+});
+</script>
+
+</body>
+</html>
